@@ -1,4 +1,4 @@
-package fi.academy.saunaback.user;
+package fi.academy.saunaback.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,27 +9,27 @@ import java.net.URI;
 
 /*  Tämä toimii kontrollerina. MVP sisältää kaikkien käyttäjien haun ja uuden käyttäjän lisäyksen.
 *   Jos lisätään metodeja, lisätään tarvittaessa myös UserRepositoryyn. */
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 @RestController
-public class UserController {
+public class UsersController {
 
-    private UserRepository urep;
+    private UsersRepository urep;
 
     @Autowired
-    public UserController(UserRepository urep){
+    public UsersController(UsersRepository urep){
         this.urep = urep;
     }
 
     @GetMapping("")
-    Iterable<User> getAllUsers() {
-        return urep.getAll();
+    Iterable<Users> getAllUsers() {
+        return urep.findAll();
     }
 /* Uuden käyttäjän luonti. Tehdään mappaus (repoon määritetty path "/users */
     @PostMapping("/newuser")
-    public ResponseEntity<?> addUser(@RequestBody User user){
-        User u = urep.save(user);
+    public ResponseEntity<?> addUser(@RequestBody Users users){
+        Users u = urep.save(users);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(user.getId()).toUri();
+                .buildAndExpand(users.getId()).toUri();
 
         return ResponseEntity.created(location).build();
     }
