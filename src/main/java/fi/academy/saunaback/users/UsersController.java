@@ -10,8 +10,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
-/*  Tämä toimii kontrollerina. MVP sisältää kaikkien käyttäjien haun ja uuden käyttäjän lisäyksen.
- *   Jos lisätään metodeja, lisätään tarvittaessa myös UserRepositoryyn. */
+/**
+ *  Luokka toimii kontrollerina. Voidaan hakea kaikki käyttäjät, luoda uusi käyttäjä sekä
+ *   lisätä käyttäjälle löylyä. Iiris
+ */
+
 @CrossOrigin
 @RequestMapping("/api/users")
 @RestController
@@ -48,7 +51,11 @@ public class UsersController {
           return ResponseEntity.noContent().build();
       }
       */
-    /*  Metodi kasvattaa käyttäjän saamaa löylymäärää yhdellä. Polkuna käytetään id.tä. Iiris*/
+    /**
+     *  Metodi kasvattaa käyttäjän saamaa löylymäärää yhdellä. Polkuna käytetään id.tä.
+     *  Haetaan käyttäjä id:n perusteella ja käytetään Users taulun metodia löylymäärän
+     *  kasvattamiseksi. Palautetaan käyttäjä. Iiris
+     */
     @PutMapping("/heat/{id}")
     public Users addUserHeat(@PathVariable long id) {
         Optional<Users> users = urep.findById(id);
@@ -58,8 +65,7 @@ public class UsersController {
         return users.get();
     }
 
-
-    /* Luo uuden käyttäjän. Pakollisena tietona käyttäjänimi. Iiris*/
+    /** Luo uuden käyttäjän. Pakollisena tietona käyttäjänimi. Pyydetään Body Users taulusta. Iiris*/
     @PostMapping("/newuser")
     public ResponseEntity<?> addUser(@RequestBody Users users){
         Users u = urep.save(users);

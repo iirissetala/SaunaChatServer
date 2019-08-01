@@ -8,26 +8,33 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * Sauna -tietokannan taulu. Pakollisia kenttiä viestin sisältö sekä käyttäjän id, joka on
+ * tiedossa viestiä kirjoitettaessa. Löylymäärä asetetaan aluksi nollaksi ja sitä voidaan lisätä
+ * asiattomasta viestisisällöstä. Iiris
+ */
+
 @Entity
 @Table(name = "messages")
 public class Messages implements Serializable {
-
-
 
     @Id
     @GeneratedValue
     private Long id;
     @NotNull
     private String text;
-    /* Viestille on annettava käyttäjän id omana muuttujanaan */
+    /** Viestille on annettava käyttäjän id omana muuttujanaan (se tiedetään koska käyttäjä luodaan ensin. Iiris*/
     @NotNull
     private long userid;
     private Integer mHeatcount = 0;
+
+    // Taulujen yhdistys onnistui, mutta ei saatu ajoissa käyttäjän id:tä viestille. Toteutettiin toisin. Iiris
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "users_id")
 //    @Fetch(FetchMode.JOIN)
 //    private Users users;
 
+/** Tyhjä konstruktori JPA:n käyttöön */
     public Messages() {
     }
 
