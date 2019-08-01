@@ -1,8 +1,14 @@
 package fi.academy.saunaback.messages;
 
+import fi.academy.saunaback.users.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+
+@CrossOrigin
 @RequestMapping("/api/messages")
 @RestController
 public class MessagesController {
@@ -20,8 +26,9 @@ public class MessagesController {
     }
 
     @PostMapping(value = "/newmessage")
-    public Messages addMessage(@RequestBody Messages m){
-        return mrep.save(m);
+    public Messages addMessages(@RequestBody Messages messages){
+        return mrep.save(messages);
     }
+
 
 }
