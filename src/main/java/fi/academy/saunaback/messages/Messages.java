@@ -19,6 +19,9 @@ public class Messages implements Serializable {
     private Long id;
     @NotNull
     private String text;
+    /* Viestille on annettava käyttäjän id omana muuttujanaan */
+    @NotNull
+    private long userid;
     private Integer mHeatcount = 0;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "users_id")
@@ -28,8 +31,9 @@ public class Messages implements Serializable {
     public Messages() {
     }
 
-    public Messages(@NotNull String text) {
+    public Messages(@NotNull String text, @NotNull long userid) {
         this.text = text;
+        this.userid = userid;
 
     }
 
@@ -49,6 +53,14 @@ public class Messages implements Serializable {
         this.text = text;
     }
 
+    public long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
+
     public Integer getmHeatcount() {
         return mHeatcount;
     }
@@ -56,15 +68,18 @@ public class Messages implements Serializable {
     public void setmHeatcount(Integer mHeatcount) {
         this.mHeatcount = mHeatcount;
     }
+    public void addMessagesHeat(){
+        this.mHeatcount=mHeatcount + 1;
+    }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Messages{");
-        sb.append("id=").append(id);
-        sb.append(", text='").append(text).append('\'');
-        sb.append(", mHeatcount=").append(mHeatcount);
-        sb.append('}');
-        return sb.toString();
+        return "Messages{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", userid=" + userid +
+                ", mHeatcount=" + mHeatcount +
+                '}';
     }
 }
 
