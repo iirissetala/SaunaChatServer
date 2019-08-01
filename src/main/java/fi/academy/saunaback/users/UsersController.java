@@ -50,7 +50,7 @@ public class UsersController {
       */
     /*  Metodi kasvattaa käyttäjän saamaa löylymäärää yhdellä. Polkuna käytetään id.tä. Iiris*/
     @PutMapping("/heat/{id}")
-    public Users retrieveStudent(@PathVariable long id) {
+    public Users addUserHeat(@PathVariable long id) {
         Optional<Users> users = urep.findById(id);
         users.get().addUsersHeat();
         urep.save(users.get());
